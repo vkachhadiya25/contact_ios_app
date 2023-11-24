@@ -319,7 +319,7 @@ class _ContactInfoAndroidScreenState extends State<ContactInfoAndroidScreen> {
                                     );
                                     providerR!.changeTime(d2!);
                                   },
-                                  icon: const Icon(Icons.lock_clock)),
+                                  icon: const Icon(Icons.watch_later_outlined)),
                               const SizedBox(
                                 width: 13,
                               ),

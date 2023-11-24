@@ -14,7 +14,7 @@ void main() {
           create: (context) => ContactProvider(),
         )
       ],
-      child: Platform.isAndroid
+      child: Platform.isIOS
           ? MaterialApp(debugShowCheckedModeBanner: false, routes: screenRoutes)
           : CupertinoApp(
               debugShowCheckedModeBanner: false,

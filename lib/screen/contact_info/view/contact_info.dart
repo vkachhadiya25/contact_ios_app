@@ -343,6 +343,40 @@ class _ContactInfoScreenState extends State<ContactInfoScreen> {
                   ),
                 ),
               ),
+              const SizedBox(
+                height: 10,
+              ),
+              Container(
+                height: MediaQuery.sizeOf(context).height * 0.09,
+                width: MediaQuery.sizeOf(context).width,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: CupertinoColors.white),
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Row(
+                        children: [
+                          GestureDetector(
+                              onTap: () {},
+                              child: const Icon(CupertinoIcons.clock)),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            "Date ${providerW!.date!.day}/${providerW!.date!.month}/${providerW!.date!.year}",
+                            style: const TextStyle(
+                                fontSize: 18, color: CupertinoColors.black),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
             ],
           ),
         ),
