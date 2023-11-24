@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../provider/contact_provider.dart';
 
 class ContactInfoAndroidScreen extends StatefulWidget {
   const ContactInfoAndroidScreen({super.key});
@@ -9,8 +12,14 @@ class ContactInfoAndroidScreen extends StatefulWidget {
 }
 
 class _ContactInfoAndroidScreenState extends State<ContactInfoAndroidScreen> {
+  ContactProvider? providerR;
+  ContactProvider? providerW;
+
   @override
   Widget build(BuildContext context) {
+    providerR = context.read<ContactProvider>();
+    providerW = context.watch<ContactProvider>();
+
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -18,33 +27,53 @@ class _ContactInfoAndroidScreenState extends State<ContactInfoAndroidScreen> {
           actions: [
             IconButton(onPressed: () {}, icon: const Icon(Icons.edit)),
             IconButton(onPressed: () {}, icon: const Icon(Icons.star_border)),
-            IconButton(
-                onPressed: () {
-                  showModalBottomSheet(
-                    context: context,
-                    builder: (context) => BottomSheet(
-                      onClosing: () {},
-                      builder: (context) => SizedBox(
-                        height: 100,
-                        child: Column(
-                          children: [
-                            ElevatedButton(
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                },
-                                child: const Text("YES")),
-                            ElevatedButton(
-                                onPressed: () {
-                                  Navigator.pushReplacementNamed(context, '/');
-                                },
-                                child: const Text("NO")),
-                          ],
-                        ),
-                      ),
-                    ),
-                  );
-                },
-                icon: const Icon(Icons.more_vert)),
+            PopupMenuButton(
+              itemBuilder: (context) => [
+                const PopupMenuItem(
+                  child: Text(
+                    "Save",
+                    style: TextStyle(color: Colors.black),
+                  ),
+                ),
+                const PopupMenuItem(
+                  child: Text("Save"),
+                ),
+                const PopupMenuItem(
+                  child: Text("Save"),
+                ),
+              ],
+            ),
+            // IconButton(
+            //     onPressed: () {
+            //
+            //     },
+            //     //   //showModelBottomSheet
+            //     // onPressed: () {
+            //     //   showModalBottomSheet(
+            //     //     context: context,
+            //     //     builder: (context) => BottomSheet(
+            //     //       onClosing: () {},
+            //     //       builder: (context) => SizedBox(
+            //     //         height: 100,
+            //     //         child: Column(
+            //     //           children: [
+            //     //             ElevatedButton(
+            //     //                 onPressed: () {
+            //     //                   Navigator.pop(context);
+            //     //                 },
+            //     //                 child: const Text("YES")),
+            //     //             ElevatedButton(
+            //     //                 onPressed: () {
+            //     //                   Navigator.pushReplacementNamed(context, '/');
+            //     //                 },
+            //     //                 child: const Text("NO")),
+            //     //           ],
+            //     //         ),
+            //     //       ),
+            //     //     ),
+            //     //   );
+            //     // },
+            //     icon: const Icon(Icons.more_vert)),
           ],
         ),
         body: Padding(
@@ -133,7 +162,7 @@ class _ContactInfoAndroidScreenState extends State<ContactInfoAndroidScreen> {
                       height: 8,
                     ),
                     Container(
-                      height: MediaQuery.of(context).size.height * 0.28,
+                      height: MediaQuery.of(context).size.height * 0.40,
                       width: MediaQuery.of(context).size.width,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
@@ -255,6 +284,48 @@ class _ContactInfoAndroidScreenState extends State<ContactInfoAndroidScreen> {
                               const Text(
                                 "+91 9978763620",
                                 style: TextStyle(fontSize: 20),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              IconButton(
+                                  onPressed: () async {
+                                    DateTime? d1 = await showDatePicker(
+                                      context: context,
+                                      initialDate: providerR!.date,
+                                      firstDate: DateTime(2001),
+                                      lastDate: DateTime(2050),
+                                    );
+                                    providerR!.changeDate(d1!);
+                                  },
+                                  icon: const Icon(Icons.calendar_month)),
+                              const SizedBox(
+                                width: 13,
+                              ),
+                              Text(
+                                "Date ${providerW!.date!.day}/${providerW!.date!.month}/${providerW!.date!.year}",
+                                style: const TextStyle(fontSize: 20),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              IconButton(
+                                  onPressed: ()  async {
+                                TimeOfDay? d2 =  await showTimePicker(
+                                      context: context,
+                                      initialTime: providerR!.time!,
+                                    );
+                                    providerR!.changeTime(d2!);
+                                  },
+                                  icon: const Icon(Icons.lock_clock)),
+                              const SizedBox(
+                                width: 13,
+                              ),
+                              Text(
+                                "Time ${providerW!.date!.hour}:${providerW!.date!.minute}:${providerW!.date!.second}",
+                                style: const TextStyle(fontSize: 20),
                               ),
                             ],
                           ),

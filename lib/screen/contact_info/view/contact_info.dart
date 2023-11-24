@@ -1,4 +1,7 @@
 import 'package:flutter/cupertino.dart';
+import 'package:provider/provider.dart';
+
+import '../provider/contact_provider.dart';
 
 class ContactInfoScreen extends StatefulWidget {
   const ContactInfoScreen({super.key});
@@ -8,8 +11,14 @@ class ContactInfoScreen extends StatefulWidget {
 }
 
 class _ContactInfoScreenState extends State<ContactInfoScreen> {
+  ContactProvider? providerR;
+  ContactProvider? providerW;
+
   @override
   Widget build(BuildContext context) {
+    providerR = context.read<ContactProvider>();
+    providerW = context.watch<ContactProvider>();
+
     return CupertinoPageScaffold(
       navigationBar: CupertinoNavigationBar(
         backgroundColor: CupertinoColors.white,
@@ -26,7 +35,10 @@ class _ContactInfoScreenState extends State<ContactInfoScreen> {
             ),
           ],
         ),
-        trailing: const Text("Edit",style: TextStyle(color: CupertinoColors.link),),
+        trailing: const Text(
+          "Edit",
+          style: TextStyle(color: CupertinoColors.link),
+        ),
       ),
       backgroundColor: CupertinoColors.lightBackgroundGray,
       child: SingleChildScrollView(
@@ -67,37 +79,77 @@ class _ContactInfoScreenState extends State<ContactInfoScreen> {
               Row(
                 children: [
                   Container(
-                    height: MediaQuery.sizeOf(context).height*0.11,
-                    width: MediaQuery.sizeOf(context).width*0.27,
-                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),color: CupertinoColors.white),
+                    height: MediaQuery.sizeOf(context).height * 0.11,
+                    width: MediaQuery.sizeOf(context).width * 0.27,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: CupertinoColors.white),
                     child: Column(
                       children: [
-                        CupertinoButton(child: const Icon(CupertinoIcons.ellipses_bubble,size: 30,),onPressed: (){},),
-                        const Text("Message",style: TextStyle(fontSize: 20,color: CupertinoColors.black),),
+                        CupertinoButton(
+                          child: const Icon(
+                            CupertinoIcons.ellipses_bubble,
+                            size: 30,
+                          ),
+                          onPressed: () {},
+                        ),
+                        const Text(
+                          "Message",
+                          style: TextStyle(
+                              fontSize: 20, color: CupertinoColors.black),
+                        ),
                       ],
                     ),
                   ),
-                  const SizedBox(width: 22,),
+                  const SizedBox(
+                    width: 22,
+                  ),
                   Container(
-                    height: MediaQuery.sizeOf(context).height*0.11,
-                    width: MediaQuery.sizeOf(context).width*0.27,
-                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),color: CupertinoColors.white),
+                    height: MediaQuery.sizeOf(context).height * 0.11,
+                    width: MediaQuery.sizeOf(context).width * 0.27,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: CupertinoColors.white),
                     child: Column(
                       children: [
-                        CupertinoButton(child: const Icon(CupertinoIcons.phone,size: 30,),onPressed: (){},),
-                        const Text("Call",style: TextStyle(fontSize: 20,color: CupertinoColors.black),),
+                        CupertinoButton(
+                          child: const Icon(
+                            CupertinoIcons.phone,
+                            size: 30,
+                          ),
+                          onPressed: () {},
+                        ),
+                        const Text(
+                          "Call",
+                          style: TextStyle(
+                              fontSize: 20, color: CupertinoColors.black),
+                        ),
                       ],
                     ),
                   ),
-                  const SizedBox(width: 22,),
+                  const SizedBox(
+                    width: 22,
+                  ),
                   Container(
-                    height: MediaQuery.sizeOf(context).height*0.11,
-                    width: MediaQuery.sizeOf(context).width*0.27,
-                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(10),color: CupertinoColors.white),
+                    height: MediaQuery.sizeOf(context).height * 0.11,
+                    width: MediaQuery.sizeOf(context).width * 0.27,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: CupertinoColors.white),
                     child: Column(
                       children: [
-                        CupertinoButton(child: const Icon(CupertinoIcons.mail,size: 30,),onPressed: (){},),
-                        const Text("Mail",style: TextStyle(fontSize: 20,color: CupertinoColors.black),),
+                        CupertinoButton(
+                          child: const Icon(
+                            CupertinoIcons.mail,
+                            size: 30,
+                          ),
+                          onPressed: () {},
+                        ),
+                        const Text(
+                          "Mail",
+                          style: TextStyle(
+                              fontSize: 20, color: CupertinoColors.black),
+                        ),
                       ],
                     ),
                   ),
@@ -121,11 +173,13 @@ class _ContactInfoScreenState extends State<ContactInfoScreen> {
                         children: [
                           Text(
                             "mobile",
-                            style: TextStyle(fontSize: 22, color: CupertinoColors.black),
+                            style: TextStyle(
+                                fontSize: 22, color: CupertinoColors.black),
                           ),
                           Text(
                             "(888) 555-5512",
-                            style: TextStyle(fontSize: 20, color: CupertinoColors.link),
+                            style: TextStyle(
+                                fontSize: 20, color: CupertinoColors.link),
                           )
                         ],
                       ),
@@ -147,11 +201,13 @@ class _ContactInfoScreenState extends State<ContactInfoScreen> {
                         children: [
                           Text(
                             "home",
-                            style: TextStyle(fontSize: 22, color: CupertinoColors.black),
+                            style: TextStyle(
+                                fontSize: 22, color: CupertinoColors.black),
                           ),
                           Text(
                             "(888) 555-1212",
-                            style: TextStyle(fontSize: 20, color: CupertinoColors.link),
+                            style: TextStyle(
+                                fontSize: 20, color: CupertinoColors.link),
                           )
                         ],
                       ),
@@ -173,11 +229,13 @@ class _ContactInfoScreenState extends State<ContactInfoScreen> {
                         children: [
                           Text(
                             "work",
-                            style: TextStyle(fontSize: 22, color: CupertinoColors.black),
+                            style: TextStyle(
+                                fontSize: 22, color: CupertinoColors.black),
                           ),
                           Text(
                             "John-AppleSeed@mac.com",
-                            style: TextStyle(fontSize: 20, color: CupertinoColors.link),
+                            style: TextStyle(
+                                fontSize: 20, color: CupertinoColors.link),
                           )
                         ],
                       ),
@@ -202,7 +260,8 @@ class _ContactInfoScreenState extends State<ContactInfoScreen> {
                     children: [
                       Text(
                         "Work\n3145 Laurel Street\nAtlanta GA 30303\nUSA",
-                        style: TextStyle(fontSize: 18, color: CupertinoColors.black),
+                        style: TextStyle(
+                            fontSize: 18, color: CupertinoColors.black),
                       ),
                     ],
                   ),
@@ -225,7 +284,60 @@ class _ContactInfoScreenState extends State<ContactInfoScreen> {
                     children: [
                       Text(
                         "Home\n1234 Laurel Street\nAtlanta GA 30303\nUSA",
-                        style: TextStyle(fontSize: 18, color: CupertinoColors.black),
+                        style: TextStyle(
+                            fontSize: 18, color: CupertinoColors.black),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Container(
+                height: MediaQuery.sizeOf(context).height * 0.09,
+                width: MediaQuery.sizeOf(context).width,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: CupertinoColors.white),
+                child: Padding(
+                  padding: EdgeInsets.all(10.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Row(
+                        children: [
+                          GestureDetector(
+                              onTap: () {
+                                showCupertinoDialog(
+                                  context: context,
+                                  builder: (context) => SizedBox(
+                                    height: 100,
+                                    child: CupertinoDatePicker(
+                                      onDateTimeChanged: (value) {
+                                        providerR!.changeDate(value);
+                                      },
+                                      initialDateTime: providerR!.date,
+                                      minimumDate: DateTime(2001),
+                                      minimumYear: 2001,
+                                      maximumDate: DateTime(2050),
+                                      maximumYear: 2050,
+                                      backgroundColor: CupertinoColors.black,
+                                    ),
+                                  ),
+                                );
+                              },
+                              child: const Icon(CupertinoIcons.calendar)),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            "Date ${providerW!.date!.day}/${providerW!.date!.month}/${providerW!.date!.year}",
+                            style: const TextStyle(
+                                fontSize: 18, color: CupertinoColors.black),
+                          ),
+                        ],
                       ),
                     ],
                   ),

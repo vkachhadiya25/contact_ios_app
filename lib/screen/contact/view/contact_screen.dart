@@ -1,4 +1,6 @@
 import 'package:flutter/cupertino.dart';
+import 'package:provider/provider.dart';
+import '../../contact_info/provider/contact_provider.dart';
 
 class ContactScreen extends StatefulWidget {
   const ContactScreen({super.key});
@@ -8,8 +10,14 @@ class ContactScreen extends StatefulWidget {
 }
 
 class _ContactScreenState extends State<ContactScreen> {
+  ContactProvider? providerR;
+  ContactProvider? providerW;
+
   @override
   Widget build(BuildContext context) {
+    providerR = context.read<ContactProvider>();
+    providerW = context.watch<ContactProvider>();
+
     return CupertinoPageScaffold(
       navigationBar: CupertinoNavigationBar(
         backgroundColor: CupertinoColors.white,
@@ -22,43 +30,56 @@ class _ContactScreenState extends State<ContactScreen> {
             ),
           ],
         ),
-        trailing: CupertinoButton(
-            child: const Icon(CupertinoIcons.ellipsis_vertical),
-            onPressed: () {
-              showCupertinoModalPopup(
-                context: context,
-                builder: (context) => CupertinoActionSheet(
-                  title: const Text(
-                    "Conformation Dialog",
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 23),
-                  ),
-                  message: const Text(
-                    "Conformation to app is open or close",
-                    style: TextStyle(fontSize: 18),
-                  ),
-                  actions: [
-                    CupertinoActionSheetAction(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      isDefaultAction: true,
-                      child: const Text("YES"),
+        trailing: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            CupertinoButton(
+                child: const Icon(CupertinoIcons.info),
+                onPressed: () {
+                  showCupertinoModalPopup(
+                    context: context,
+                    builder: (context) => CupertinoActionSheet(
+                      title: const Text(
+                        "Conformation Dialog",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 23),
+                      ),
+                      message: const Text(
+                        "Conformation to app is open or close",
+                        style: TextStyle(fontSize: 18),
+                      ),
+                      actions: [
+                        CupertinoActionSheetAction(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          isDefaultAction: true,
+                          child: const Text("YES"),
+                        ),
+                        CupertinoActionSheetAction(
+                          onPressed: () {
+                            Navigator.pushNamed(context, 'ContactInfo');
+                          },
+                          isDestructiveAction: true,
+                          child: const Text("NO"),
+                        ),
+                      ],
+                      cancelButton: CupertinoActionSheetAction(
+                        child: const Text("Cancel"),
+                        onPressed: () {},
+                      ),
                     ),
-                    CupertinoActionSheetAction(
-                      onPressed: () {
-                        Navigator.pushNamed(context, 'ContactInfo');
-                      },
-                      isDestructiveAction: true,
-                      child: const Text("NO"),
-                    ),
-                  ],
-                  cancelButton: CupertinoActionSheetAction(
-                    child: const Text("Cancel"),
-                    onPressed: () {},
-                  ),
-                ),
-              );
-            }),
+                  );
+                }),
+            CupertinoContextMenu(actions:
+              const [
+               CupertinoContextMenuAction(child: Text("Call history")),
+               CupertinoContextMenuAction(child: Text("Settings")),
+               CupertinoContextMenuAction(child: Text("Help and feedback")),
+              ],
+              child: const Icon(CupertinoIcons.ellipsis_vertical,size: 20,),),
+          ],
+        ),
       ),
       backgroundColor: CupertinoColors.white,
       child: SingleChildScrollView(
